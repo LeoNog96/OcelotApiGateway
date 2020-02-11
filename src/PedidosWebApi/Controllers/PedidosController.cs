@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace PedidosWebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PedidosController
     {
         [HttpGet]

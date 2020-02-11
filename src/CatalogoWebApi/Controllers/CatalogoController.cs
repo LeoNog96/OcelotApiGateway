@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace CatalogoWebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
 
     public class CatalogoController
     {
