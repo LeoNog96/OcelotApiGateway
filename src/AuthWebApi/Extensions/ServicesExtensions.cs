@@ -18,6 +18,7 @@ namespace AuthWebApi.Extensions
         {
             services.AddScoped<LoginService>();
         }
+
         public static void ConfigureTokenConfigurations (this IServiceCollection services, IConfiguration config)
         {
             var signingConfigurations = new SigningConfigurations ();

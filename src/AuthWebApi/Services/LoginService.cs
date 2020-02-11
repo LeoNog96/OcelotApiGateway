@@ -73,13 +73,14 @@ namespace AuthWebApi.Services
             //     ClockSkew = TimeSpan.Zero,
             //     RequireExpirationTime = true,
             // };
-
+            var expires = now.AddDays(_tokenConfigurations.Days);
+ 
             var jwt = new JwtSecurityToken(
                 issuer: _tokenConfigurations.Issuer,
                 audience: _tokenConfigurations.Audience,
                 // claims: claims,
                 notBefore: now,
-                expires: now.AddDays(_tokenConfigurations.Days),
+                expires: expires,
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
             );
 
@@ -88,7 +89,7 @@ namespace AuthWebApi.Services
             return new
             {
                 access_token = encodedJwt,
-                expires_in = (int)TimeSpan.FromMinutes(2).TotalSeconds
+                expires_in = expires
             };
         }
     }
