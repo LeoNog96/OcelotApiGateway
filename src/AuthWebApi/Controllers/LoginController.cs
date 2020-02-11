@@ -10,7 +10,7 @@ namespace AuthWebApi.Controllers
     [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
-        LoginService _service;
+        private readonly LoginService _service;
 
         public LoginController(LoginService service)
         {

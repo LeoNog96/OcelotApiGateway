@@ -5,7 +5,7 @@ namespace CatalogoWebApi.Jwt
 {
     public class SigningConfigurations
     {
-        public SigningConfigurations(SecurityKey key, SigningCredentials signingCredentials) 
+        public SigningConfigurations(SecurityKey key, SigningCredentials signingCredentials)
         {
             this.Key = key;
             this.SigningCredentials = signingCredentials;

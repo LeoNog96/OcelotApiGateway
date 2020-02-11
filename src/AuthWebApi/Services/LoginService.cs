@@ -11,19 +11,11 @@ namespace AuthWebApi.Services
 {
     public class LoginService
     {
-        private readonly SigningConfigurations _signingConfigurations;
         private readonly TokenConfigurations _tokenConfigurations;
-        private readonly IConfiguration _config;
 
-        public LoginService(SigningConfigurations signingConfigurations,
-            TokenConfigurations tokenConfigurations,
-            IConfiguration config)
+        public LoginService(TokenConfigurations tokenConfigurations)
         {
-            _signingConfigurations = signingConfigurations;
-
             _tokenConfigurations = tokenConfigurations;
-
-            _config = config;
         }
 
         public object Auth (Login login)
@@ -33,20 +25,17 @@ namespace AuthWebApi.Services
                 throw new Exception ("Usuario nulo");
             }
 
-            var auth = true;
+            const bool auth = true;
 
             if (auth)
             {
                 return TokenGenerate ();
             }
-
-            return null;
         }
 
         /// <summary>
         /// Gerador de Token
         /// </summary>
-        /// <param name="user">Usuario</param>
         /// <returns>Objeto com o token gerado</returns>
         private object TokenGenerate ()
         {
@@ -61,20 +50,8 @@ namespace AuthWebApi.Services
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenConfigurations.SecretKey));
 
-            // var tokenValidationParameters = new TokenValidationParameters
-            // {
-            //     ValidateIssuerSigningKey = true,
-            //     IssuerSigningKey = signingKey,
-            //     ValidateIssuer = true,
-            //     ValidIssuer = _tokenConfigurations.Issuer,
-            //     ValidateAudience = true,
-            //     ValidAudience =_tokenConfigurations.Audience,
-            //     ValidateLifetime = true,
-            //     ClockSkew = TimeSpan.Zero,
-            //     RequireExpirationTime = true,
-            // };
             var expires = now.AddDays(_tokenConfigurations.Days);
- 
+
             var jwt = new JwtSecurityToken(
                 issuer: _tokenConfigurations.Issuer,
                 audience: _tokenConfigurations.Audience,
