@@ -24,7 +24,7 @@ namespace OcelotApiGateway
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("configuration.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"configuration.{env.EnvironmentName}.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
